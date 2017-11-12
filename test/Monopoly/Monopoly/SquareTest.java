@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class SquareTest {
-	Square testSquare=new Square("Yasin");
+	Square testSquare=new Square("Yasin",1);
 	@Test
 	public void testSquaregetName() {
 		assertEquals("Yasin", testSquare.getName());

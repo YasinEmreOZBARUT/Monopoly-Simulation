@@ -1,10 +1,10 @@
 package Monopoly;
 public class Player {
-	private int Location=0;
+	private int Location;
 	private String name;
 	private String piece;
 	private boolean turn;
-	private int money=1500;	
+	private int money=200;	
 	public Player(){
 		
 	}
@@ -27,9 +27,12 @@ public class Player {
 	}
 	
 	public int getLocation() {
+		if(this.Location>=40){
+			this.Location%=40;
+		}
 		return Location;
 	}
-	public void setLocation(int DiceTotal) {//Burada Location kare sayýsýndan büyük mü küçük mü kontrol et
+	public void setLocation(int DiceTotal) {
 		this.Location += DiceTotal;
 	}
 	
@@ -49,4 +52,3 @@ public class Player {
 	}
 	
 }	
-

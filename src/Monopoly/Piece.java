@@ -1,8 +1,10 @@
 package Monopoly;
 import java.lang.String;
 
-public class Piece {
+public class Piece extends Player{
 	private String[] pieces=new String[8];
+	private int pieceLocation;
+	Board pieceLocations=new Board();
 	public Piece(){
 		pieces[0]="Horse";
 		pieces[1]="Plane";
@@ -18,5 +20,12 @@ public class Piece {
 	}
 	public String[] getAllPieces() {
 		return pieces;
+	}
+	
+	public int getPieceLocation() {
+		return pieceLocation;
+	}
+	public void setPieceLocation() {
+		this.pieceLocation = this.getLocation();
 	}
 }
