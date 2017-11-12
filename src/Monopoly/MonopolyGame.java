@@ -45,6 +45,12 @@ public class MonopolyGame {
 			int i=0;
 			int temp=0;
 		while(i<=PlayerNumber-1){
+			if(Players[i].isTurn()==true){
+				if(Players[i].getMoney()==0){
+					Players[i].setTurn(false);
+					i++;
+				}
+			
 			temp=0;
 			int faceValue1,faceValue2;
 			System.out.println(Players[i].getPiece()+" Old Location:"+Players[i].getLocation());
@@ -56,7 +62,6 @@ public class MonopolyGame {
 			
 			Players[i].setLocation(dieTotal[i]);
 			
-		
 			System.out.println(Players[i].getPiece()+" New Location:"+(Players[i].getLocation()));
 			buildBoard.getSquare(Players[i].getLocation()).landOn(Players[i].getLocation());
 			Players[i].setMoney(goSquare.landOn(Players[i].getLocation(), Players[i].getMoney()));
@@ -64,7 +69,6 @@ public class MonopolyGame {
 			Players[i].setMoney(incomeTaxSquare.landOn(Players[i].getLocation(), Players[i].getMoney()));
 			Players[i].setMoney(luxuryTaxSquare.landOn(Players[i].getLocation(), Players[i].getMoney()));
 			jailSquare.landOn(Players[i].getLocation());
-			
 			
 			System.out.println(Players[i].getPiece()+" has "+Players[i].getMoney());
 			System.out.println(buildBoard.getSquare(Players[i].getLocation()).getName());
@@ -77,7 +81,7 @@ public class MonopolyGame {
 			}
 			System.out.println();
 			
-			i++;
+			i++;}
 			Thread.sleep(100);
 			}}
 		

@@ -3,7 +3,7 @@ public class Player {
 	private int Location;
 	private String name;
 	private String piece;
-	private boolean turn;
+	private boolean turn=true;
 	private int money=200;	
 	public Player(){
 		
