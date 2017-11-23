@@ -20,6 +20,7 @@ public class MonopolyGame {
 		LuxuryTaxSquare luxuryTaxSquare=new LuxuryTaxSquare();
 		JailSquare jailSquare=new JailSquare();
 		GoToJailSquare goToJailSquare=new GoToJailSquare();
+		ElectricUtilitySquare electricUtilitySquare=new ElectricUtilitySquare();
 		
 		Player[] Players=new Player[PlayerNumber];
 		Dice diceTotal=new Dice();
@@ -69,6 +70,12 @@ public class MonopolyGame {
 			Players[i].setMoney(incomeTaxSquare.landOn(Players[i].getLocation(), Players[i].getMoney()));
 			Players[i].setMoney(luxuryTaxSquare.landOn(Players[i].getLocation(), Players[i].getMoney()));
 			jailSquare.landOn(Players[i].getLocation());
+			if(electricUtilitySquare.getRent()>0){
+				Players[electricUtilitySquare.getOwner()].setMoney(Players[electricUtilitySquare.getOwner()].getMoney()+electricUtilitySquare.getRent());
+			}
+			else{
+			Players[i].setMoney(electricUtilitySquare.landOn(Players[i].getLocation(), i, Players[i].getMoney()));
+			}
 			
 			System.out.println(Players[i].getPiece()+" has "+Players[i].getMoney());
 			System.out.println(buildBoard.getSquare(Players[i].getLocation()).getName());
