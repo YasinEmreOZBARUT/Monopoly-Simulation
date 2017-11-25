@@ -21,6 +21,8 @@ public class MonopolyGame {
 		JailSquare jailSquare=new JailSquare();
 		GoToJailSquare goToJailSquare=new GoToJailSquare();
 		ElectricUtilitySquare electricUtilitySquare=new ElectricUtilitySquare();
+		WaterUtilitySquare waterUtilitySquare=new WaterUtilitySquare();
+		RailRoads railRoad=new RailRoads();
 		
 		Player[] Players=new Player[PlayerNumber];
 		Dice diceTotal=new Dice();
@@ -28,7 +30,7 @@ public class MonopolyGame {
 		
 		Piece playersPiece=new Piece();
 		
-		if(PlayerNumber>8){
+		if(PlayerNumber>8 || PlayerNumber<2){
 			System.out.println("Monopoly is a game which is playing with at most 8 players!!!");
 			System.exit(0);
 		}
@@ -46,10 +48,18 @@ public class MonopolyGame {
 			int i=0;
 			int temp=0;
 		while(i<=PlayerNumber-1){
-			if(Players[i].isTurn()==true){
-				if(Players[i].getMoney()==0){
+			if(Players[i].getMoney()<=0){
+				System.out.println(Players[i].getName()+" bankrupted...");
+				System.out.println();
+				i++;
+			}
+			else if(Players[i].isTurn()==true){
+				if(Players[i].getMoney()<=0){
 					Players[i].setTurn(false);
 					i++;
+					if(i>PlayerNumber){
+						break;
+					}
 				}
 			
 			temp=0;
@@ -75,6 +85,31 @@ public class MonopolyGame {
 			}
 			else{
 			Players[i].setMoney(electricUtilitySquare.landOn(Players[i].getLocation(), i, Players[i].getMoney()));
+			}
+			
+			if(waterUtilitySquare.getRent()>0){
+				Players[waterUtilitySquare.getOwner()].setMoney(Players[waterUtilitySquare.getOwner()].getMoney()+waterUtilitySquare.getRent());
+			}
+			else{
+			Players[i].setMoney(waterUtilitySquare.landOn(Players[i].getLocation(), i, Players[i].getMoney()));
+			}
+			
+			if(railRoad.getRent()>0){
+				if(Players[i].getLocation()==6){
+					Players[railRoad.getOwner(0)].setMoney(Players[railRoad.getOwner(0)].getMoney()+railRoad.getRent());
+				}
+				else if(Players[i].getLocation()==16){
+					Players[railRoad.getOwner(1)].setMoney(Players[railRoad.getOwner(1)].getMoney()+railRoad.getRent());
+				}
+				else if(Players[i].getLocation()==26){
+					Players[railRoad.getOwner(2)].setMoney(Players[railRoad.getOwner(2)].getMoney()+railRoad.getRent());
+				}
+				else if(Players[i].getLocation()==36){
+					Players[railRoad.getOwner(3)].setMoney(Players[railRoad.getOwner(3)].getMoney()+railRoad.getRent());
+				}
+			}
+			else{
+				Players[i].setMoney(railRoad.landOn(Players[i].getLocation(), i, Players[i].getMoney()));
 			}
 			
 			System.out.println(Players[i].getPiece()+" has "+Players[i].getMoney());

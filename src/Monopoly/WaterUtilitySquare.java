@@ -1,14 +1,14 @@
 package Monopoly;
 
-public class ElectricUtilitySquare extends Square{
+public class WaterUtilitySquare extends Square{
 	private int owner;
 	private int rent=0;
 	private int dieTotal;
 	boolean owned=false;
 	int landOn(int location,int index,int totalMoney){
 		super.landOn(location);
-		if(location==13){
-			System.out.println("On Electric Utility Square");
+		if(location==29){
+			System.out.println("On Water Utility Square");
 			if(owned==false){
 				Dice die=new Dice();
 				dieTotal=die.getDiceTotal();
@@ -43,5 +43,5 @@ public class ElectricUtilitySquare extends Square{
 	public int getOwner() {
 		return owner;
 	}
-
+	
 }

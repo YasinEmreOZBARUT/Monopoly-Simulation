@@ -1,6 +1,9 @@
 package Monopoly;
 
 public class Square{
+	private int price;
+	private int rent;
+	private boolean owned=false;
 	private String name;
 	private Square nextSquare;
 	private int index;
@@ -36,6 +39,25 @@ public class Square{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getRent() {
+		return rent;
+	}
+	public void setRent(int rent) {
+		this.rent = rent;
+	}
+	public boolean isOwned() {
+		return owned;
+	}
+	public void setOwned(boolean owned) {
+		this.owned = owned;
 	}
 }
 	
