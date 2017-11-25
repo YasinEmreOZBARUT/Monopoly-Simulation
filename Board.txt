@@ -1,0 +1,60 @@
+package Monopoly;
+
+import java.io.IOException;
+
+public class Board {
+	private int TotalSquares=40;
+	private Square[] square=new Square[TotalSquares];
+	private void build() throws IOException{
+		int j=0;
+		LotsSquare lotsSquare=new LotsSquare();
+		String[][] values =new String[21][3];
+		values = lotsSquare.fileRead();
+		int t=Integer.parseInt(values[j][0]);
+		for (int i=0;i<TotalSquares;i++){
+			
+			if(t==i){
+				square[i]=new Square("Square "+i,i);
+				square[i].setPrice(Integer.parseInt(values[j][1]));
+				square[i].setRent(Integer.parseInt(values[j][2]));
+				j++;
+			}
+			else{
+			square[i]=new Square("Square "+i,i);}
+			//square[i].setIndex(i);
+		}
+	}
+	private void linkSquares(){
+		for(int i=0;i< (TotalSquares -1);i++){
+			linkingSquares(i);
+		}
+		Square startingSquare=(Square) square[0];
+		Square finishingSquare=(Square) square[TotalSquares-1];
+		finishingSquare.setNextSquare(startingSquare);
+	}
+	
+	private void linkingSquares(int i){
+		Square on=(Square) square[i];
+		Square nextSquare=(Square) square[i+1];
+		on.setNextSquare(nextSquare);
+	}
+	
+	public Square getSquare(int j) {
+		if(j>=TotalSquares){
+			j=j%TotalSquares;
+		}
+		
+		return square[j];
+	}
+	public Board(){
+		try {
+			build();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		linkSquares();
+	}
+	public int getTotalSquares() {
+		return TotalSquares;
+	}	
+}
