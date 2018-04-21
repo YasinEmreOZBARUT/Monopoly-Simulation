@@ -1,4 +1,4 @@
-# object oriented project first iteration
+# Monopoly-Simulation project first iteration
 
 
 - YASİN EMRE OZBARUT - 150116839
